@@ -422,4 +422,4 @@ class Rantest(object):
 
 if __name__ == "__main__":
 
-    print introd
+    print (introd)

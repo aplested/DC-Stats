@@ -1,7 +1,13 @@
 #! /usr/bin/python
 
-from Tkinter import *
-from ttk import Separator
+import sys
+if sys.version_info[0] < 3:
+    from Tkinter import *
+    from ttk import Separator
+else:
+    from tkinter import *
+    from tkinter.ttk import Separator
+    
 from Rantest import Rantest
 from data_screen import Data_Screen
 from PlotRandomDist import PlotRandomDist
@@ -83,13 +89,13 @@ class FrameRantestContinuous:
     def callback_paired(self):
         'Called when ""Paired Test?"" tickbox is checked'
         self.paired = self.var1.get()
-        print self.paired
+        print (self.paired)
 
     def callback_hedges(self):
         'Called when ""Hedges CI"" tickbox is checked'
 
         self.H_CI= self.var2.get()
-        print self.H_CI
+        print (self.H_CI)
 
 ### end of NEW BY AP
 
