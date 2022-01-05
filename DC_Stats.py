@@ -7,11 +7,14 @@ import sys
 
 if __name__ == "__main__":
     
-    print (sys.version)
+    print ("Using Python version ", sys.version)
     try:
-        from PyQt5.QtGui import *
+        from PyQt5 import QtGui #import *
+        print ("Imported Pyqt5 QtGui")
         from PyQt5.QtWidgets import QApplication
+        print ("Imported Pyqt5 QtWidgets QApplication")
         from GUI import QTrantest
+        print ("Imported DC-Stats GUI")
         app = QApplication(sys.argv)
         form = QTrantest.RantestQT()
         form.show()

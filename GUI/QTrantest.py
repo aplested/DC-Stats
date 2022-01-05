@@ -265,21 +265,33 @@ class RandomisationContTab(QWidget):
         self.paired = 0
         self.path = ""
 
-        bt1 = QPushButton("Get data from Excel file")
-        layout.addLayout(single_button(bt1))
+        layout0 = QHBoxLayout()
+        layout0.addWidget(QLabel("Get data from:"))
+        
+        bt_xls = QPushButton("Excel .xlsx file")
+        layout0.addWidget(bt_xls)
+        
+        bt_gen = QPushButton("generic .txt file")
+        layout0.addWidget(bt_gen)
+            
+        layout.addLayout(layout0)
+            
         layout1 = QHBoxLayout()
         layout1.addWidget(QLabel("Number of randomisations:"))
         self.ed1 = QLineEdit(str(self.nran))
         layout1.addWidget(self.ed1)
         self.ch1 = QCheckBox("&Paired test?")
         layout1.addWidget(self.ch1)
+        
         layout.addLayout(layout1)
+        
         bt2 = QPushButton("Run randomisation test")
         layout.addLayout(single_button(bt2))
 
         self.ed1.editingFinished.connect(self.ran_changed)
         self.ch1.stateChanged.connect(self.ran_changed)
-        bt1.clicked.connect(self.open_file)
+        bt_xls.clicked.connect(lambda: self.open_file(".xlsx"))
+        bt_gen.clicked.connect(lambda: self.open_file(".txt"))
         bt2.clicked.connect(self.run_rantest)
 
     def ran_changed(self):
@@ -289,15 +301,29 @@ class RandomisationContTab(QWidget):
             self.paired = 0
         self.nran = int(self.ed1.text()) 
 
-    def open_file(self):
+    def open_file(self, extension):
         """Called by TAKE DATA FROM FILE button in Tab2"""
+        if extension == ".xlsx":
+            filter = "MS Excel Files (*.xlsx)"
+        elif extension == ".txt":
+            filter = "Text Files (*.txt)"
+            
         try:
             self.filename, filt = QFileDialog.getOpenFileName(self,
-                "Open Data File...", self.path, "MS Excel Files (*.xlsx)")
+                "Open Data File...", self.path, filter)
             self.path = os.path.split(str(self.filename))[0]
-            #TODO: allow loading from other format files
-            self.X, self.Y = load_two_samples_from_excel_with_pandas(self.filename)
+            #TODO: make loading from other format files more fancy
+            ext_of_data = os.path.splitext(str(self.filename))[1]
+            print (ext_of_data)
+            if  ext_of_data == ".xlsx":
+                print ("loading from excel")
+                self.X, self.Y = load_two_samples_from_excel_with_pandas(self.filename)
+            elif ext_of_data == ".txt":
+                print ("loading from txt")
+                self.X, self.Y = load_two_samples_from_txt_with_pandas(self.filename)
+            print (self.X, self.Y)
             self.initiate_rantest()
+            print ("initiated rantest")
         except:
             pass
         
@@ -476,15 +502,31 @@ def single_button(bt):
     b_layout.addStretch()
     return b_layout
 
+def load_two_samples_from_txt_with_pandas(filename):
+    """ Load two columns from a text file.
+        Return two samples as lists. """
+    # TODO: should be moved to dataIO but need to agree on refactoring IO
+    dtx = pd.read_csv(filename, sep="\t", header=None)
+    #print (dtx)
+    X = dtx.iloc[:,0].dropna().values #.tolist()
+    Y = dtx.iloc[:,1].dropna().values #.tolist()
+    return X, Y
+
+
 def load_two_samples_from_excel_with_pandas(filename):
     """ Load two columns from a selected sheet in Excel file. 
         Return two samples as lists. """
     # TODO: should be moved to dataIO but need to agree on refactoring IO
-    xl = pd.ExcelFile(filename)
-    dialog = ExcelSheetDlg(xl.sheet_names) #self
-    if dialog.exec_():
-        xlssheet = dialog.returnSheet()
-    dt = xl.parse(xlssheet)
+    print (filename)
+    with pd.ExcelFile(filename) as xl:
+        print ("got excel file")
+        dialog = ExcelSheetDlg(xl.sheet_names) #self
+    
+        if dialog.exec_():
+            xlssheet = dialog.returnSheet()
+            
+        dt = xl.parse(xlssheet)
+        
     X = dt.iloc[:,0].dropna().values #.tolist()
     Y = dt.iloc[:,1].dropna().values #.tolist()
     return X, Y
