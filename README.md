@@ -31,17 +31,20 @@ Get a recent version of miniconda from the following site:
 https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html#
 
 Create a blank working environment for DC-Stats: 
+
 `conda create --name DC-stats`
 
 Switch to this environment:
+
 `conda activate DC-Stats`
 
 Then it is convenient to issue 
+
 `pip install python==3.8`
 
 which will install python 3.8 purely in this environment. A blank canvas. pip is also installed by this command (but not other things we need). 
 
-Download the DC-Stats folder from this page and navigate to it. Then the `dcstats` package can be installed locally with all the needed dependent packages (note the space and a dot at the end):
+Download the DC-Stats folder from this page and navigate to it. Then the `DC-stats` package can be installed locally with all the needed dependent packages (note the space and a dot at the end):
 
 `pip install .`
 
