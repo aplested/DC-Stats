@@ -14,5 +14,6 @@ setup(name='dcstats',
           'pandas',
           'matplotlib',
           'PyQt5',
+          'openpyxl'
       ],
       zip_safe=False)
