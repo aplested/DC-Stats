@@ -25,7 +25,25 @@ To use data from Excel, save the two sets of values in two columns as tab-delimi
 
 ## Installation
 
-If you are using 'pip' then the `dcstats` package can be installed locally with (note a space and a dot at the end):
+Straightforward installation can be achieved with miniconda at the Terminal. 
+
+Get a recent version of miniconda from the following site:
+
+Create a blank working environment for DC-Stats 
+
+`conda create --name DC-stats`
+
+Switch to this environment:
+
+`conda activate DC-Stats`
+
+Then it is convenient to issue 
+
+`pip install python==3.8`
+
+which will install python 3.8 purely in this environment. A blank canvas.
+
+Download the DC-Stats folder from this page and navigate to it. Then the `dcstats` package can be installed locally with all the needed dependent packages (note the space and a dot at the end):
 
 `pip install .`
 
@@ -33,7 +51,12 @@ or
 
 `pip install -e .`
 
-The latter creates symlink which allows any source code change be available locally immediately.
+The latter command creates symlink which allows any source code change be available locally immediately.
+
+In future, when you want to run DC-Stats, open the Terminal and issue:
+
+conda activate DC-Stats
+python DC_stats.py
 
 
 # Projected ongoing development
