@@ -329,9 +329,10 @@ cached_tinv = memoize(tinv)
 
 #AP's addition for Hedge's calculation
 def simple_stats(r):
-    total = sum(r)
+    total = math.fsum(r)
+    # to mitigate loss of precision for fp addition
     average = total / float(len(r))
-    sum_deviation_squared = sum([(i - average) ** 2 for i in r])
+    sum_deviation_squared = math.fsum([(i - average) ** 2 for i in r])
     standard_deviation = math.sqrt(sum_deviation_squared / (len(r) - 1 or 1))
 
     return average, standard_deviation

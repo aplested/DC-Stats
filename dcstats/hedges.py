@@ -84,7 +84,8 @@ class Hedges_d:
         
         #pooled variance
         s_pooled = math.sqrt(((n2 - 1) * s2 ** 2 + (n1 - 1) * s1 ** 2) / (n1 + n2 - 2))
-
+        #print (s_pooled,n1,n2,s1,s2)
+        
         #Hedges' g
         biased_d = (m2 - m1) / s_pooled
 
@@ -119,13 +120,15 @@ class Hedges_d:
             #means and SDs of bootstrap sampled distributions
             mbr1, sbr1 = mean_SD(br1)
             mbr2, sbr2 = mean_SD(br2)
-        
-            #need to call a function for Hedges_d that returns a value, not storing it
-            #current alternative, just include here, it is so simple.
+            
+            
+            # need to call a function for Hedges_d that returns a value, not storing it
+            # current alternative: just include here, it is so simple.
             s_pooled = math.sqrt((n2m * sbr2 ** 2 + n1m * sbr1 ** 2) / (n1m + n2m))
-        
+            #print (s_pooled, n1m, n2m, mbr1,mbr2,sbr1,sbr2)
             #Hedges' g
-            biased_d = (mbr2 - mbr1) / s_pooled
+            # AP 05/01/22 added "or 1" because random.choices can choose identical value and give 0 for both.
+            biased_d = (mbr2 - mbr1) / (s_pooled or 1)
         
             # correction has no influence on the bootstrap distribution
             # so apply it later to save multiplications
