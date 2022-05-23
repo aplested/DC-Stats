@@ -51,8 +51,8 @@ class Hedges_d:
 
             print ("Degrees of Freedom: {:d} , t @ P_t-CDF = 0.975 : {:.2f} ".format(df, t))
                                      
-        self.lower95CI = self.d - t * self.SE_d
-        self.upper95CI = self.d + t * self.SE_d
+        self.lower95CI = math.fabs(self.d - t * self.SE_d)
+        self.upper95CI = math.fabs(self.d + t * self.SE_d)
         return (self.lower95CI, self.upper95CI)     #should refactor to avoid return
     
     def asymptotic_SE_d_unpaired (self):
@@ -87,7 +87,7 @@ class Hedges_d:
         #print (s_pooled,n1,n2,s1,s2)
         
         #Hedges' g
-        biased_d = (m2 - m1) / s_pooled
+        biased_d = math.fabs (m2 - m1) / s_pooled
 
         self.correction = 1.0 - 3.0 / (4 * (n1 + n2 - 2) - 1)
         
@@ -128,7 +128,7 @@ class Hedges_d:
             #print (s_pooled, n1m, n2m, mbr1,mbr2,sbr1,sbr2)
             #Hedges' g
             # AP 05/01/22 added "or 1" because random.choices can choose identical value and give 0 for both.
-            biased_d = (mbr2 - mbr1) / (s_pooled or 1)
+            biased_d = math.fabs(mbr2 - mbr1) / (s_pooled or 1)
         
             # correction has no influence on the bootstrap distribution
             # so apply it later to save multiplications
