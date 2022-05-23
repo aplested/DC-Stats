@@ -3,11 +3,13 @@ Python port and extension of David Colquhoun's Statistics Tools
 
 Work porting to Python from original FORTRAN was begun by Remigijus Lape at UCL. 
 
-Qt5 GUI under Python 3.8 is now the preferred environment. 
+Scroll down for step-by-step installation instructions.
+
+Qt5 GUI under Python 3.8+ is now the preferred environment. 
 Dependencies are: pandas, numpy and scipy. Note openpyxl is also needed if you want to open .xlsx files. 
 You can get everything you need on any platform with Anaconda or miniconda.
 
-We tested DC_stats on macOS up to 11.6 (BigSur) and Windows. Linux should also be fine. 
+We tested DC_stats on macOS up to 12 (Monterey) and Windows. Linux should also be fine. 
 
 If you work with Python version 2.7 (as packaged with macOS), you will get the Tkinter GUI that is no longer maintained. This version should work with old versions of OSX like 10.6 though. However, as even Andrew has now gone over to Python 3, you ought to as well. Step-by-step instructions are included below. 
 
@@ -19,7 +21,9 @@ To run, open the Terminal (Mac/Linux) or cmd.exe (Windows), navigate to the DC-S
 
 You can do a randomization test on continuous or binomial data, and look at Fiellers theorem for the standard deviation of a ratio too. For continuous randomization test, information about effect size (Hedges' unbiased d and its approximate confidence interval from bootstrap) is also included in the output. 
 
-To use data from Excel, save the two sets of values in two columns as tab-delimited text without titles. You should be able to choose which sheet to use from a multi-sheet .xlsx file. 
+Tip: If you have a very small p value, you will need to use more randomization trials, at least as many as the reciprocal of your P value. For example, if your P-value is 1e-6, then you ought to do 5-10 million trials (will take minutes to run).
+
+To use data from Excel, save the two sets of values in two columns as tab-delimited text without titles. You can choose which sheet to use from a multi-sheet .xlsx file. 
 
 ![screenshot](Screenshot.png)
 
@@ -42,7 +46,7 @@ Then it is convenient to issue
 
 `pip install python==3.8`
 
-which will install python 3.8 purely in this environment. A blank canvas. pip is also installed by this command (but not other things we need). 
+which will install python 3.8 purely in this environment. It's a blank canvas. pip is also installed by this command (but not other things we need). 
 
 Download the DC-Stats folder from this page and navigate to it. Then the `DC-stats` package can be installed locally with all the needed dependent packages (note the space and a dot at the end):
 
@@ -52,12 +56,15 @@ or
 
 `pip install -e .`
 
-The latter command creates symlink which allows any source code change be available locally immediately.
+The latter command creates symlink which allows any local source code change be available locally, immediately.
 
 In future, when you want to run DC-Stats, open the Terminal and issue:
 
 `conda activate DC-Stats
 python DC_stats.py`
+
+To grab the latest version (0.3.2 right now) use 
+`pip install git+https://github.com/aplested/DC-Stats`
 
 
 # Projected ongoing development
