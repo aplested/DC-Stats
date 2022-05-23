@@ -288,7 +288,7 @@ class RandomisationContTab(QWidget):
         bt2 = QPushButton("Run randomisation test")
         layout.addLayout(single_button(bt2))
 
-        self.ed1.editingFinished.connect(self.ran_changed)
+        self.ed1.textChanged.connect(self.ran_changed)
         self.ch1.stateChanged.connect(self.ran_changed)
         bt_xls.clicked.connect(lambda: self.open_file(".xlsx"))
         bt_gen.clicked.connect(lambda: self.open_file(".txt"))
@@ -299,7 +299,8 @@ class RandomisationContTab(QWidget):
             self.paired = 1
         else:
             self.paired = 0
-        self.nran = int(self.ed1.text()) 
+        self.nran = int(self.ed1.text())
+        #print ("nran changed to ",self.nran)
 
     def open_file(self, extension):
         """Called by TAKE DATA FROM FILE button in Tab2"""
