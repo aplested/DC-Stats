@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='dcstats',
-      version='0.3.0',
+      version='0.3.1',
       description="DC's lab statistical tools",
       url='https://github.com/aplested/DC-Stats',
       keywords='randomisation hedges fieller',
