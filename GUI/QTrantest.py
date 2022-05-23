@@ -457,7 +457,7 @@ class ExcelSheetDlg(QDialog):
         layout2.addLayout(layout1)
         layout2.addWidget(ok_cancel_button(self))
         self.setLayout(layout2)
-        self.resize(200, 300)
+        self.resize(320, 300)
         self.setWindowTitle("Choose Excel sheet to load...")
 
     def sheetSelected(self):
