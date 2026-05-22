@@ -421,11 +421,11 @@ class WelcomeScreen(QWidget):
         self.setFixedWidth(500)
         self.setFixedHeight(250)
         self.layout = QVBoxLayout(self)
-        self.layout.addWidget(QLabel("<p align=left>Welcome to DC's Statistics Tools. "
-        "Select a statistical test from the tabs.</p>"))
+        _greeting = "<p align=left>Welcome to DC's Statistics Tools. &nbsp; Select a statistical test from the tabs.</p>"
+        self.layout.addWidget(QLabel(_greeting))
         self.layout.addWidget(self.movie_screen())
         self.layout.addWidget(QLabel("<p align=right><i>David Colquhoun  </i></p>"))
-    
+        
 
     def movie_screen(self):
         """Set up the gif movie screen."""

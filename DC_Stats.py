@@ -21,6 +21,7 @@ if __name__ == "__main__":
         app.exec_()
         
     except:
+        print ("Something went wrong with importing PyQt5, trying legacy Tkinter")
         if sys.version_info[0] < 3:
             from Tkinter import *
         else:
