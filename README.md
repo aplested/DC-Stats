@@ -68,6 +68,7 @@ The latter command creates symlink which allows any local source code change be 
 In future, when you want to run DC-Stats, open the Terminal and issue:
 
 `conda activate DC-Stats
+
 python DC_stats.py`
 
 To grab the latest version (0.3.2 right now) use 
