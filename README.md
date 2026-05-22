@@ -1,17 +1,18 @@
 # DC Stats
 Python port and extension of David Colquhoun's Statistics Tools
 
-Work porting to Python from original FORTRAN was begun by Remigijus Lape at UCL. 
+Work porting to Python from original FORTRAN was done by Remigijus Lape at UCL. 
 
-Scroll down for step-by-step installation instructions.
+See below for step-by-step installation instructions.
 
-Qt5 GUI under Python 3.8+ is now the preferred environment. 
-Dependencies are: pandas, numpy and scipy. Note openpyxl is also needed if you want to open .xlsx files. 
+Qt5 GUI under Python 3.8+ is now the preferred environment (tested and working on Python 3.14, 2026)
+
+Dependencies are therefore: Qt5, pandas, numpy, scipy, matplotlib and openpyxl (if you want to open .xlsx files). 
 You can get everything you need on any platform with Anaconda or miniconda.
 
-We tested DC_stats on macOS up to 12 (Monterey) and Windows. Linux should also be fine. 
+We tested DC_stats on macOS up to 15.7 (Sequoia) and Windows. Linux should also be fine. 
 
-If you work with Python version 2.7 (as packaged with macOS), you will get the Tkinter GUI that is no longer maintained. This version should work with old versions of OSX like 10.6 though. However, as even Andrew has now gone over to Python 3, you ought to as well. Step-by-step instructions are included below. 
+If you work with Python version 2.7 (as packaged with macOS), you will get the Tkinter GUI that is no longer maintained, and the code will not run properly on a modern machine. This version should work with old old versions of OSX like 10.6 though (!) You might have good reasons for running code on an ancient machine but this version is no longer supported. Step-by-step instructions for current installation are included below. 
 
 Examples of how to use modules are provided in Jupyter notebooks (.ipynb files). 
 
@@ -44,9 +45,15 @@ Switch to this environment:
 
 Then it is convenient to issue 
 
-`pip install python==3.8`
+`conda install python`
 
-which will install python 3.8 purely in this environment. It's a blank canvas. pip is also installed by this command (but not other things we need). 
+which will install python 3.14 (as of 2026) purely in this environment. It's a blank canvas. pip is also installed by this command (but not other things we need). If this fails you can alternatively try:
+
+`conda install python==3.8` 
+
+or 
+
+`pip install python==3.8`
 
 Download the DC-Stats folder from this page and navigate to it. Then the `DC-stats` package can be installed locally with all the needed dependent packages (note the space and a dot at the end):
 
@@ -70,6 +77,6 @@ To grab the latest version (0.3.2 right now) use
 # Projected ongoing development
 This software is under development. Output is not fully tested, and therefore you should exercise caution if you plan to use the results for production / publication. 
 
-Batch processing of data is now implemented for Rantest. Intuitive import and export should follow.
+Batch processing of data is now implemented for Rantest. Intuitive import and export could be next.
 
 
